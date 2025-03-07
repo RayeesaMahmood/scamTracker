@@ -139,7 +139,8 @@
                 });
 
                 const data = await response.json();
-                const isSpam = data.data.some(record => record.data.number === phoneNumber);
+                const normalizedInput = phoneNumber.replace(/\D/g, '');  // Remove non-digit characters
+                const isSpam = data.data.some(record => record.data.number.replace(/\D/g, '') === normalizedInput);
 
                 if (isSpam) {
                     resultDiv.className = 'p-4 rounded bg-red-100 text-red-700';
